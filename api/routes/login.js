@@ -3,16 +3,17 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const path = require("path");
 const jwt = require('jsonwebtoken');
+const axios = require('axios');
+
 const User = require('../models/userModel');
 
 
 const rootPath = path.join(__dirname, "..", "..");
 const loginPath = path.join(rootPath, "public", "page", "login.ejs");
+const mainPath = path.join(rootPath, "public", "page", "main.html");
 
 
-// test 
 router.get("/", (req, res, next) => {
-    // res html
     res.render(loginPath);
 });
 
@@ -30,6 +31,7 @@ router.post('/register', (req, res) => {
                 message: error
             });
         }
+        console.log('User registered successfully')
         res.status(200).send({
             message: 'User registered successfully'
         });
@@ -38,7 +40,7 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
     User.findOne({
-        email: req.body.email
+        username: req.body.username
     }, (error, user) => {
         if (error) {
             return res.status(400).send({
@@ -66,6 +68,7 @@ router.post('/login', (req, res) => {
             }, 'secretKey', {
                 expiresIn: '1h'
             });
+            console.log('user login successful')
             res.status(200).send({
                 message: 'Login successful',
                 token: token
