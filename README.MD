@@ -1,4 +1,4 @@
-# Project Name : MusicProject
+# Project Name : MaliMusic
 
 ## Description
 This backend project Music listening
