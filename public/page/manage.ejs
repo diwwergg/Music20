@@ -1,14 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage</title>
+    <meta charset="utf-8">
+    <title>Manage Music API</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
+
 <body>
-    
-
-
+    <div class="container">
+        <h2>Manage Music API</h2>
+        <p>Add new music, edit existing music, delete music or view all music</p>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <form id="music-form">
+                    <div class="form-group">
+                        <label for="musicName">Music Name</label>
+                        <input type="text" class="form-control" id="musicName" name="musicName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="photoLink">Photo Link</label>
+                        <input type="text" class="form-control" id="photoLink" name="photoLink" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="musicLink">Music Link</label>
+                        <input type="text" class="form-control" id="musicLink" name="musicLink" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Music</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Music Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="musicList">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <hr>
+        <div id="musicList1">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Music Name</th>
+                        <th>Photo Link</th>
+                        <th>Music Link</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% musics.forEach(music=> { %>
+                        <tr>
+                            <td>
+                                <%= music.musicName %>
+                            </td>
+                            <td>
+                                <img src="<%= music.photoLink %>" class="img-fluid" alt="music photo"
+                                    style="max-width:100px;">
+                            </td>
+                            <td style="max-width: 600px; word-break:break-all;">
+                                <%= music.musicLink %>
+                            </td>
+                            <td>
+                                <%= music.description %>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" onclick="deleteMusic('<%= music._id %>')">Delete</button>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
 </body>
+<!-- jquery -->
+<script src=""></script>
+<script>
+    function deleteMusic(id) {
+        if (confirm("Are you sure you want to delete this music?")) {
+            $.ajax({
+                url: `http://localhost:3000/music-manage/music/${id}`,
+                method: "DELETE",
+                success: function (result) {
+                    alert(result.message);
+                    location.reload();
+                }
+            });
+        }
+    }
+    document.getElementById("music-form").addEventListener("submit", function (event) {
+        const musicName = document.getElementById("musicName").value;
+        const photoLink = document.getElementById("photoLink").value;
+        const musicLink = document.getElementById("musicLink").value;
+        const description = document.getElementById("description").value;
+
+        const data = {
+            musicName,
+            photoLink,
+            musicLink,
+            description
+        }
+        if (musicName == "" || photoLink == "" || musicLink == "") {
+            alert("Please fill in all fields");
+            return;
+        }
+        if (confirm("Are you sure you want to add this music?")) {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:3000/music-manage/music",
+                data: data,
+                success: function (res) {
+                    console.log(res);
+                    alert(result.message);
+                    location.reload();
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+    });
+</script>
+
 </html>

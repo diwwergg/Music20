@@ -1,8 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-
+const path = require('path')
 const Music = require("../models/musicModel");
+
+const rootPath = path.join(__dirname, "..", "..");
+const pagePath = path.join(rootPath, "public", "page", "manage.ejs");
+
+router.get('/', (req, res) =>{
+    Music.find({}, (error, musics) => {
+        if (error) res.status(500).send(error);
+        res.render(pagePath, { musics });
+    });
+});
 
 router.get("/music", (req, res) => {
     Music.find({}, (error, music) => {
