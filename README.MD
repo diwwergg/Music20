@@ -18,4 +18,21 @@ This backend project Music listening
 ```npm install```s
 
 # Usage
-```npm start```
+```npm run test``` for testing
+
+```npm start``` for production
+
+```npm run dev``` for development
+
+# Library Used 
+- Http for create server to listen port
+- Express for routing api for backend
+- Nodemon for development server 
+- Mongoose for manage database 
+- Body-parser for parse body request 
+- ejs for view engine 
+- axios for http request for api call 
+- bcryptjs for hash password for security
+- jsonwebtoken for generate token for authentication
+- mongodb for database connection 
+- morgan for log request and response in console

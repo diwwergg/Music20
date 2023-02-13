@@ -33,7 +33,10 @@ router.post('/register', (req, res) => {
         }
         console.log('User registered successfully')
         res.status(200).send({
-            message: 'User registered successfully'
+            message: 'User registered successfully',
+            id_token: user._id,
+            username: user.username,
+            email: user.email   
         });
     });
 });
