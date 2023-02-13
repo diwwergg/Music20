@@ -101,9 +101,9 @@ function pause_song(){
       play_pause_btn.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
     }
  }
- function play_song() {
-  song[index_no].play();
-}
+//  function play_song() {
+//   song[index_no].play();
+// }
 
 song.forEach((track, index) => {
   track.addEventListener("ended", function() {

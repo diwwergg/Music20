@@ -11,7 +11,7 @@ class Music {
 }
 
 const getData = async () => {
-  const token = localStorage.getItem('token');
+  const token = await localStorage.getItem('token');
   const url = 'http://localhost:3000/music-manage/music';
 
   if (!token) {
@@ -37,10 +37,10 @@ const getData = async () => {
   }
 }
 
-
+let All_song = []
 const displayMusic2 = async () => {
   const musics = await getData();
-  const musicInstances = await musics.map(music => new Music(
+    All_song = await musics.map(music => new Music(
     music.id,
     music.musicName,
     music.photoLink,
@@ -48,19 +48,19 @@ const displayMusic2 = async () => {
     music.description
   ));
   const renderHtmlAllSong = () => {
-    for (let i = 0; i < musicInstances.length; i++) {
-      const key = musicInstances[i].id;
+    for (let i = 0; i < All_song.length; i++) {
+      const key = All_song[i].id;
 
       let Html =
         ` <div class="song" key=${key}>
           <div class="img">
-          <img src="${String(musicInstances[i].img)}"/>
+          <img src="${String(All_song[i].img)}"/>
           </div>
           <div class="more">
-          <audio src="${String(musicInstances[i].path)}" id="music"></audio>
+          <audio src="${String(All_song[i].path)}" id="music"></audio>
           <div class="song_info">
-             <p id="title">${musicInstances[i].name.toString()}</p>
-             <p>${musicInstances[i].singer.toString()}</p>
+             <p id="title">${All_song[i].name.toString()}</p>
+             <p>${All_song[i].singer.toString()}</p>
           </div>
           <button id="play_btn"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
           </div>
