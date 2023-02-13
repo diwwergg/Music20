@@ -1,4 +1,5 @@
 let tracks = document.querySelector('.tracks');
+let All_song = []
 
 class Music {
   constructor(id, name, img, path, singer) {
@@ -37,7 +38,6 @@ const getData = async () => {
   }
 }
 
-let All_song = []
 const displayMusic2 = async () => {
   const musics = await getData();
     All_song = await musics.map(music => new Music(
