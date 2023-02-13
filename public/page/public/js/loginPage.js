@@ -9,7 +9,9 @@ async function handleFetch(url, jsonData, method = "POST") {
       });
   
       if (!response.ok) {
+        alert("Username or password is incorrect");
         throw new Error(response.statusText);
+        
       }
   
       return await response.json();
@@ -32,8 +34,9 @@ async function handleFetch(url, jsonData, method = "POST") {
     const data = await handleFetch("http://localhost:3000/register", jsonData);
     console.log(data);
     alert("You have successfully registered");
+    
   }
-  
+
   const loginButton = document.getElementById("loginButton");
   loginButton.addEventListener("click", async event => {
     event.preventDefault();
@@ -48,7 +51,7 @@ async function handleFetch(url, jsonData, method = "POST") {
       alert("Please fill in all fields");
       return;
     }
-  
+    
     await login(jsonData);
   });
   
@@ -66,8 +69,15 @@ async function handleFetch(url, jsonData, method = "POST") {
   
     if (!username || !email || !password) {
       alert("Please fill in all fields");
+      {
+       document.getElementById("chk").click();
+      }
       return;
     }
-  
+    
     await register(jsonData);
   });
+   // this function if click sing up Auto open Login Function By kla 007
+   document.getElementById("registerButton").addEventListener("click", function(){
+   document.getElementById("chk").click();
+});

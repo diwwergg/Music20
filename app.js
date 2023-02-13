@@ -34,6 +34,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(express.static('public/page'));
+app.use(express.static('public/page/public'));
+app.use(express.static('public/page/public/js'));
 
 
 app.use((req, res, next) => {
@@ -53,6 +55,8 @@ app.use((req, res, next) => {
 
 app.use("/", login); // http://localhost:3000
 app.use("/music", main) // http://localhost:3000/music
+app.use("/music2", main)
+
 app.use("/music-manage", musicManagement) //http://localhost:3000/music-manange/
 app.use("/login2", login2) //http://localhost:3000/login2
 

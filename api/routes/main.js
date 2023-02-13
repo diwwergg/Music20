@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 
 const rootPath = path.join(__dirname, "..", "..");
-const pagePath = path.join(rootPath, "public", "page", "Main.html");
+const pagePath = path.join(rootPath, "public", "page","main.html");
 
 router.get("/", (req, res, next) => {
     // res html

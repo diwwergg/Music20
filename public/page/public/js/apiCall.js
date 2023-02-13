@@ -41,4 +41,3 @@ async function handleFetchAuth(url, jsonData, method = "GET", token) {
     }
 }
 
-const response = await handleFetchAuth("http://localhost:3000/login", jsonData, "POST", token);
