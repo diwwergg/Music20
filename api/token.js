@@ -1,24 +1,29 @@
 const jwt = require('jsonwebtoken');
 
-const secretKey = 'secretKey';
+// Define your secret key for signing and verifying tokens
+const secretKey = process.env.SECRET_KEY;
 
-function verifyToken(req, res, next) {
-  const bearerHeader = req.headers['authorization'];
-  if (!bearerHeader) {
-    return res.status(401).send({
-      message: 'Unauthorized'
-    });
+// Middleware function to verify the token
+function verifyToken1(req, res, next) {
+  // Get the token from the authorization header
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  // If the token does not exist, return a 401 Unauthorized response
+  if (!token) {
+    return res.status(401).send({ auth: false, message: 'Failed to authenticate token. The token is Forbidden' });
   }
-  const token = bearerHeader.split(' ')[1];
-  jwt.verify(token, secretKey, (error, data) => {
-    if (error) {
-      return res.status(401).send({
-        message: 'Unauthorized'
-      });
-    }
-    req.userId = data._id;
+  try {
+    // Verify the token using the secret key
+    const decoded = jwt.verify(token, 'secretKey');
+    // Attach the decoded token payload to the request object
+    req.user = decoded;
+    console.log('decoded is', decoded);
+    // Call the next middleware function
     next();
-  });
+  } catch (err) {
+    // If the token is invalid, return a 403 Forbidden response
+    return res.status(403).send({ auth: false, message: 'Failed to authenticate token. The token is Forbidden' });
+  }
 }
 
-export default verifyToken;
+module.exports = verifyToken1;

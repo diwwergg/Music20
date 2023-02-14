@@ -5,14 +5,24 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Audio player</title>
 	<link rel="stylesheet" href="public/css/main/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-3JoQlWJe1qKjx2SgdwI0vB/fWdH/+o9jKNN4lzgZv0EeH/V8j+QbSvlz1v7yrYYdWz8I9+g4C4ZvHnGcyWJ8bw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-
+	
+	 <button class="Button js-button" id="logout_button">
+		logout
+	  </button>
 <div class="main">
+	<div>
+		
+	</div>
     <!-- top section -->
     <div class="top_section">
-  		<h5>Mali Audioaaa&nbsp;&nbsp;<i class="fa fa-headphones" aria-hidden="true"></i></h5>
+  		<h5> <i class="fa fa-headphones" aria-hidden="true"></i></h5>
   	</div>
 
 
@@ -22,8 +32,11 @@
 
     <!-- small music player -->
     <div class="small_music_player">
+		
     	<div class="s_player_img">
+			
     		<div class="playing_img">
+				
     			<img src="https://github.com/garrncp/Songweb/raw/main/_8.mp3" alt="">
     		</div>
     	
@@ -47,6 +60,7 @@
 
     <!--  popup music player part -->
     <div class="popup_music_player">
+		
          <div class="top">
     	    <p>Now Playing</p>
     	    <i class="fa fa-chevron-down" aria-hidden="true" id="down_player"></i>
@@ -57,13 +71,14 @@
        </div>
 
        <div class="song_description">
+		
           <h3 id="current_track_name">Make Me Move</h3>
           <p id="current_singer_name">NoCopyrightSounds [NCS]</p>
        </div>
 
        <div class="controlls">
     	 <div class="progress_part">
-    		<input type="range" min="0" max="100" value="0" id="slider" onchange="change_duration()">
+    		<input type="range" min="0" max="100" value="0" id="slider" onchange="changeDuration(event)">
     		<div class="durations">
     			<p id="current_duration">0:00</p>
     		    <p id="total_duration">0:00</p>
@@ -72,20 +87,30 @@
        </div>
     		
         <!-- controlls btn's -->
+		
         <div class="controlls_btns">
 			<button id="backward_btn"><i class="fa fa-step-backward" aria-hidden="true"></i></button>
 			<button id="play_pause_btn"><i class="fa fa-play" aria-hidden="true"></i></button>
 			<button id="forward_btn"><i class="fa fa-step-forward" aria-hidden="true"></i></button>
+			<div class="volume_controls">
+				<input type="range" min="0" max="100" value="100" class="slider" id="volume_slider">
+			  </div>
+			  </div>
+			  
         </div>
       </div>
     </div>
+	
 </div>
-
+   
 
 <!-- song list file -->
-<!-- <script src="song_list.js"></script> -->
+<!-- <script src="public/page/Logoutstt.js"></script> -->
 <!-- <script src="maininmain.js"></script> -->
 <script src="public/js/mainModify.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js'></script>
+<script  src="./script.js"></script>
+<script src="public/CheckToken.js"></script>
 <!-- <script src="public/js/apiCall.js"></script> -->
 
 </body>

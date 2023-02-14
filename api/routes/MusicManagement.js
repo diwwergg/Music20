@@ -3,6 +3,8 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const path = require('path')
 const Music = require("../models/musicModel");
+const verifyToken1 = require("../token");
+
 
 const rootPath = path.join(__dirname, "..", "..");
 const pagePath = path.join(rootPath, "public", "page", "manage.ejs");
@@ -14,14 +16,14 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get("/music", (req, res) => {
+router.get("/music", verifyToken1, (req, res) => {
     Music.find({}, (error, music) => {
         if (error) res.status(500).send(error);
         res.send(music);
     });
 });
 
-router.get("/music/:id", (req, res) => {
+router.get("/music/:id",verifyToken1, (req, res) => {
     Music.findById(req.params.id, (error, music) => {
         if (error) res.status(500).send(error);
         res.send(music);
@@ -29,9 +31,7 @@ router.get("/music/:id", (req, res) => {
 });
 
 
-
-
-router.post("/music", async (req, res, next) => {
+router.post("/music",verifyToken1, async (req, res, next) => {
     const [isValid, text] = validationMusic(req, res);
     if (!isValid) {
         return res.status(400).send({ error: text });
@@ -60,14 +60,14 @@ router.post("/music", async (req, res, next) => {
 });
 
 
-router.put("/music/:id", (req, res) => {
+router.put("/music/:id", verifyToken1, (req, res) => {
     Music.findByIdAndUpdate(req.params.id, req.body, { new: true }, (error, music) => {
         if (error) res.status(500).send(error);
         res.send(music);
     });
 });
 
-router.delete("/music/:id", (req, res) => {
+router.delete("/music/:id", verifyToken1, (req, res) => {
     Music.findByIdAndRemove(req.params.id, (error, music) => {
         if (error) res.status(500).send(error);
         const response = {

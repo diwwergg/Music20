@@ -241,12 +241,25 @@ const RunMain = () => {
         }
     });
 
-
+    // change_duration
     // change slider position 
-    function change_duration() {
+    function changeDuration() {
         slider_position = song[index_no].duration * (slider.value / 100);
         song[index_no].currentTime = slider_position;
     }
+
+    // when click on slider then change duration time of song
+    slider.addEventListener('click', function () {
+        // Get the current value of the slider
+        const value = slider.value;
+        // Calculate the new current time of the audio element
+        const audio = song[index_no]
+        const duration = audio.duration;
+        const newCurrentTime = (duration * value) / 100;
+        // Update the current time of the audio element
+        song[index_no].currentTime = newCurrentTime;
+    });
+
 
 
     /*forward btn (next)*/
@@ -305,4 +318,38 @@ const RunMain = () => {
         current_singer_name.innerHTML = All_song[index_no].singer;
         play_pause_btn.innerHTML = '<i class="fa fa-pause" aria-hidden="true"></i>';
     }
+    const volumeControls = document.querySelector('.volume_controls');
+    const volumeSlider = document.getElementById('volume_slider');
+    let volume = 1;
+    volumeSlider.value = volume * 100;
+    volumeSlider.addEventListener('input', () => {
+        volume = volumeSlider.value / 100;
+        setVolume(volume);
+    });
+    // Function to set the volume
+    function setVolume(volume) {
+        // Set the volume of the song element at index_no
+        song[index_no].volume = volume;
+        // Set the value of the volume slider
+        volumeSlider.value = volume * 100;
+    }
+
+
+
+
 }
+
+const logoutButton = document.getElementById("logout_button");
+
+
+logoutButton.addEventListener("click", async function () {
+
+    await sessionStorage.clear();
+    // remove the token from the local storage
+    await localStorage.removeItem("token");
+
+    window.location.href = "http://localhost:3000/";
+});
+
+
+

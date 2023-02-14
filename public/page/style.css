@@ -1,0 +1,35 @@
+:root {
+  --button-height: 30px;
+  
+  
+}
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+
+
+.Button {
+  background: 4px solid white;
+  border: none;
+  display: inline-block;
+  height: var(--button-height);
+  
+  overflow: hidden;
+  padding: 0 40px;
+  position: relative;
+}
+
+.Button,
+svg {
+  cursor: pointer;
+  font-family: 'Roboto';
+  font-size: 20px;
+  text-transform: uppercase;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
+}

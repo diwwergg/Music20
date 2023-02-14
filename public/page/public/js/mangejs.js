@@ -1,6 +1,5 @@
 const URL_ORIGIN = window.location.origin;
-const token = localStorage.getItem("token");
-console.log(token);
+console.log(URL_ORIGIN);
 console.log(location.pathname);
 
 
@@ -16,6 +15,7 @@ document.getElementById("music-form2").addEventListener("submit", function (even
 })
 
 function createMusic() {
+    const token = localStorage.getItem("token");
     const musicName = document.getElementById("musicName").value;
     let photoLink = document.getElementById("photoLink").value;
     let musicLink = document.getElementById("musicLink").value;
@@ -43,7 +43,9 @@ function createMusic() {
             data: data,
             success: function (res) {
                 console.log(res);
-                alert(result.message);
+                if (result.message) {
+                    alert(result.message);
+                }
                 // clear window location after submit
                 window.location.href = `${URL_ORIGIN}/music-manage`
             },
@@ -57,6 +59,7 @@ function createMusic() {
 
 
 function deleteMusic(id) {
+    const token = localStorage.getItem("token");
     if (confirm("Are you sure you want to delete this music?")) {
         const URL = `${URL_ORIGIN}/music-manage/music/${id}`;
         $.ajax({
@@ -64,7 +67,9 @@ function deleteMusic(id) {
             headers: { "Authorization": `Bearer ${token}` },
             method: "DELETE",
             success: function (result) {
-                alert(result.message);
+                if (result.message) {
+                    alert(result.message);
+                }
                 window.location.href = `${URL_ORIGIN}/music-manage`
             }
         });
@@ -72,6 +77,7 @@ function deleteMusic(id) {
 }
 
 function editMusic() {
+    const token = localStorage.getItem("token");
     if (confirm("Are you sure you want to edit this music?")) {
         const id = document.getElementById(`musicId`).value;
         const musicName = document.getElementById(`musicName2`).value;
@@ -100,9 +106,11 @@ function editMusic() {
             data: data,
             success: function (res) {
                 console.log(res);
-                alert(result.message);
+                if (result.message) {
+                    alert(result.message);
+                }
                 // clear window location after submit
-                window.location.href = `${URL_ORIGIN}/music-manage`
+                // window.location.href = `${URL_ORIGIN}/music-manage`
             },
             error: function (err) {
                 console.log(err);
@@ -117,7 +125,13 @@ function editMusicSet(id) {
     const photoLink = document.getElementById(`photoLink_${id}`).src;
     const musicLink = document.getElementById(`musicLink_${id}`).textContent.trim();
     const description = document.getElementById(`description_${id}`).textContent.trim();
-    
+
+    console.log(id);
+    console.log(musicName);
+    console.log(photoLink);
+    console.log(musicLink);
+    console.log(description);
+
     // set data from input
     document.getElementById(`musicId`).value = id;
     document.getElementById(`musicName2`).value = musicName;

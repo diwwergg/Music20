@@ -5,11 +5,13 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");   
 const mongoose = require("mongoose");
 const env = require('dotenv');
+const jwt = require('jsonwebtoken');
+
 
 // import routes 
 const login = require("./api/routes/login");
 const main = require("./api/routes/main");
-const musicManagement = require("./api/routes/MusicManagement")
+const musicManagement = require("./api/routes/MusicManagement");
 
 
 // set up routes which should handle requests 
@@ -57,6 +59,20 @@ app.use("/", login);
 app.use("/music", main) // URL/music
 app.use("/music-manage", musicManagement) // URL/music-manange/
 
+
+app.get('/checkToken', (req, res) => {
+  const token = req.query.token;
+  if (!token) return res.status(401).send({ auth: false, message: 'No token provided. The token is Unauthorized' });
+  jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+      if (err) return res.status(403).send({ auth: false, message: 'Failed to authenticate token. The token is Forbidden' });
+      res.status(200).send({
+        auth: true,
+        message: 'Token is valid',
+        decoded: decoded
+      });
+  });
+}
+);
 
 app.use((req, res, next) => {
   const error = new Error("Not found");

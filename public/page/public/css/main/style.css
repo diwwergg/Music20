@@ -10,6 +10,7 @@ body{
 	place-items: center;
   background-image: url(https://github.com/garrncp/Songweb/raw/main/723262.gif);
 	min-height: 100vh;
+  
 }
 .main{
     position: relative;
@@ -378,3 +379,4 @@ box-shadow: inset 5px 5px 5px rgba(0,0,0,0.2),
 }
 
 /*Dev Ideas*/
+
