@@ -10,8 +10,7 @@ const env = require('dotenv');
 const login = require("./api/routes/login");
 const main = require("./api/routes/main");
 const musicManagement = require("./api/routes/MusicManagement")
-const login2 = require("./api/routes/login2")
-const main2 = require('./api/routes/main2')
+
 
 // set up routes which should handle requests 
 const envPath = __dirname + '/.env';
@@ -54,12 +53,9 @@ app.use((req, res, next) => {
 
 // Routes which should handle requests
 
-app.use("/", login); // http://localhost:3000
-app.use("/music", main) // http://localhost:3000/music
-app.use("/music2", main2)
-
-app.use("/music-manage", musicManagement) //http://localhost:3000/music-manange/
-app.use("/login2", login2) //http://localhost:3000/login2
+app.use("/", login); 
+app.use("/music", main) // URL/music
+app.use("/music-manage", musicManagement) // URL/music-manange/
 
 
 app.use((req, res, next) => {

@@ -7,7 +7,7 @@ const Music = require("../models/musicModel");
 const rootPath = path.join(__dirname, "..", "..");
 const pagePath = path.join(rootPath, "public", "page", "manage.ejs");
 
-router.get('/', (req, res) =>{
+router.get('/', (req, res) => {
     Music.find({}, (error, musics) => {
         if (error) res.status(500).send(error);
         res.render(pagePath, { musics });
@@ -30,8 +30,12 @@ router.get("/music/:id", (req, res) => {
 
 
 
-router.post("/music", async (req, res) => {
-    await validationMusic(req, res);
+
+router.post("/music", async (req, res, next) => {
+    const [isValid, text] = validationMusic(req, res);
+    if (!isValid) {
+        return res.status(400).send({ error: text });
+    }
     const musicName = req.body.musicName;
     try {
         const existingMusic = await Music.findOne({ musicName });
@@ -44,6 +48,9 @@ router.post("/music", async (req, res) => {
             musicLink: req.body.musicLink,
             description: req.body.description
         });
+        music.musicLink = music.musicLink.replace(/\s/g, ''); // replace all space with ''
+        music.photoLink = music.photoLink.replace(/\s/g, ''); // replace all space with ''
+
         const savedMusic = await saveMusic(music);
         res.send(savedMusic);
     } catch (error) {
@@ -51,7 +58,6 @@ router.post("/music", async (req, res) => {
         res.status(500).send({ error: 'Failed to save music' });
     }
 });
-
 
 
 router.put("/music/:id", (req, res) => {
@@ -80,22 +86,24 @@ const validationMusic = (req, res) => {
     const nameList = ["musicName", "photoLink", "musicLink"]
     list.forEach((value, index) => {
         if (value === null || value === undefined) {
-            res.send(`${nameList[index]} is empty `)
+            const text = `${nameList[index]} is required`;
+            return false, text;
         }
-    })
-}
 
+    })
+    return true, "not error";
+};
 
 const saveMusic = (music) => new Promise((resolve, reject) => {
     music.save((error, savedMusic) => {
-      if (error) {
-        console.log(error);
-        reject(error);
-      } else {
-        console.log('Music saved successfully');
-        resolve(savedMusic);
-      }
+        if (error) {
+            console.log(error);
+            reject(error);
+        } else {
+            console.log('Music saved successfully');
+            resolve(savedMusic);
+        }
     });
-  });
+});
 
 module.exports = router;

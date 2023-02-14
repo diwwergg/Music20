@@ -1,3 +1,5 @@
+let URL_ORIGIN = window.location.origin;
+
 let tracks = document.querySelector('.tracks');
 let All_song = []
 
@@ -13,7 +15,7 @@ class Music {
 
 const getData = async () => {
     const token = await localStorage.getItem('token');
-    const url = 'http://localhost:3000/music-manage/music';
+    const url = `${URL_ORIGIN}/music-manage/music`;
 
     if (!token) {
         window.location.href = '/';
