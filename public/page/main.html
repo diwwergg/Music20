@@ -11,16 +11,20 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="./style.css">
 </head>
+  
 <body>
 	
 	 <button class="Button js-button" id="logout_button">
 		logout
 	  </button>
+	  
+	  <h1 class="Buttonn js-buttonn" id="username-container" ></h1> 
 <div class="main">
 	<div>
 		
 	</div>
     <!-- top section -->
+	
     <div class="top_section">
   		<h5> <i class="fa fa-headphones" aria-hidden="true"></i></h5>
   	</div>
@@ -107,10 +111,17 @@
 <!-- song list file -->
 <!-- <script src="public/page/Logoutstt.js"></script> -->
 <!-- <script src="maininmain.js"></script> -->
+
 <script src="public/js/mainModify.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js'></script>
 <script  src="./script.js"></script>
 <script src="public/CheckToken.js"></script>
+<script>
+	const username = localStorage.getItem('username');
+	console.log(username);
+	 const usernameContainer = document.getElementById('username-container');
+	 usernameContainer.innerText = `Welcome : ${username}`;
+ </script>
 <!-- <script src="public/js/apiCall.js"></script> -->
 
 </body>

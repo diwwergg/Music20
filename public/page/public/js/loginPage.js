@@ -28,11 +28,12 @@ async function login(jsonData) {
   const urlMusic = URL_ORIGIN + '/music'
   const data = await handleFetch(urlApi, jsonData);
   console.log(data);
-  localStorage.setItem("token", data.token);
+  await localStorage.setItem("token", data.token);
+  await localStorage.setItem("username", jsonData.username);
   if (data.token) {
     window.location.href = urlMusic;
     return true;
-  } 
+  }
   return false;
 
 }
@@ -43,7 +44,7 @@ async function register(jsonData) {
   if (!data) {
     alert("Username or email already exists");
     return false;
-  }else{
+  } else {
     console.log(data);
     alert("You have successfully registered");
     return true;
@@ -65,7 +66,7 @@ loginButton.addEventListener("click", async event => {
     alert("Please fill in all fields");
     return;
   }
-
+   
   const check = await login(jsonData);
   if (!check) {
     alert("Username or password is incorrect");
@@ -102,3 +103,4 @@ registerButton.addEventListener("click", async event => {
 document.getElementById("registerButton").addEventListener("click", function () {
   document.getElementById("chk").click();
 });
+

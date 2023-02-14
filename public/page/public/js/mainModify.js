@@ -338,17 +338,15 @@ const RunMain = () => {
 
 
 }
-
 const logoutButton = document.getElementById("logout_button");
-
-
 logoutButton.addEventListener("click", async function () {
 
     await sessionStorage.clear();
     // remove the token from the local storage
     await localStorage.removeItem("token");
+    await localStorage.removeItem("username");
 
-    window.location.href = "http://localhost:3000/";
+    window.location.href = URL_ORIGIN;
 });
 
 

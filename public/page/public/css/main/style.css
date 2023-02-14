@@ -28,6 +28,33 @@ body{
     opacity: 0.9;
     box-shadow: 0.1px 4px 8px 4px rgba(0,0,0,0.5);
 }
+/* responesive .main */
+@media screen and (max-width: 1600px) {
+  .main{
+    width: 60%;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .main{
+    width: 65%;
+  }
+}
+@media screen and (max-width: 1200px){
+  .main{
+    width: 70%;
+  }
+}
+@media screen and (max-width: 1000px){
+  .main{
+    width: 80%;
+  }
+}
+@media screen and (max-width: 800px){
+  .main{
+    width: 95%;
+  }
+}
+  
 
 
 /*top_section*/
@@ -379,4 +406,15 @@ box-shadow: inset 5px 5px 5px rgba(0,0,0,0.2),
 }
 
 /*Dev Ideas*/
+#username-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1.5em;
+  opacity: 0.85;
+  transform-origin: top left;
+  color: #e4bb68
+  
+}
+
 
