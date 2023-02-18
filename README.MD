@@ -41,7 +41,17 @@ This backend project Music listening
 
 
 # Structure Design
-[photo](MaliMusic.png)
-
 <!-- show photo -->
 ![design](MaliMusic.png "MaliMusic")
+
+## Login Page Image
+![login](public/login.png "login")
+
+## Music Page Image
+![music](public/main.png "music")
+
+## Music Management Page Image
+![music](public/manage.png "music")
+
+# Video Presentation
+<!-- [![Watch the video](https://img.youtube.com/vi/1ZQ2QZ1ZQ2Q/0.jpg)](https://youtu.be/1ZQ2QZ1ZQ2Q) -->
