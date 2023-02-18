@@ -54,4 +54,5 @@ This backend project Music listening
 
 # Video Presentation
 <!-- add link youtube  https://youtu.be/dnlyX0P2cyY -->
-![video](https://youtu.be/dnlyX0P2cyY "video")
+<!-- [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE) -->\
+[![youtube link](https://img.youtube.com/vi/dnlyX0P2cyY/0.jpg)](https://www.youtube.com/watch?v=dnlyX0P2cyY)
