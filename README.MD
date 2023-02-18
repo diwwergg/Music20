@@ -38,8 +38,7 @@ This backend project Music listening
 - jsonwebtoken for generate token for authentication
 - mongodb for database connection 
 - morgan for log request and response in console
-
-
+- dotenv for load environment variable
 # Structure Design
 <!-- show photo -->
 ![design](MaliMusic.png "MaliMusic")
