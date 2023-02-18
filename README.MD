@@ -1,5 +1,7 @@
 # Project Name : MaliMusic
 
+
+
 ## Description
 This backend project Music listening
 
@@ -15,7 +17,7 @@ This backend project Music listening
 
 
 # Installation
-```npm install```s
+```npm install```
 
 # Usage
 ```npm run test``` for testing
@@ -36,3 +38,7 @@ This backend project Music listening
 - jsonwebtoken for generate token for authentication
 - mongodb for database connection 
 - morgan for log request and response in console
+
+
+# Structure Design
+[photo](MaliMusic.png)
